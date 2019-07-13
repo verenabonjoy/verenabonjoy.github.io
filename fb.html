@@ -80,12 +80,10 @@
         function login() {
 
             FB.login(function (response) {
-                    statusChangeCallback(response);
-                },
-
-                {
-                    scope: "email"
-                });
+                statusChangeCallback(response);
+            }, {
+                scope: "email"
+            });
 
         }
 
