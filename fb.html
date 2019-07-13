@@ -141,14 +141,15 @@
         function start() {
 
             // 呼叫 Graph API:  FB.api('連線網址', 回呼函式(結果));
-            FB.api('https://graph.facebook.com/10162373113125221', function (
-                response) { // 可簡寫 '/10162373113125221' , 若已登入, access_token也可不寫, FB裡面模組自己處理 
-                console.log(response);
+            FB.api('/me?fields=id, name, email',
+                function ( // 'https://graph.facebook.com/10162373113125221'
+                    response) { // 可簡寫 '/10162373113125221' , 若已登入, access_token也可不寫, FB裡面模組自己處理 
+                    console.log(response);
 
-                let main = document.querySelector('#main');
-                main.innerHTML = response.name;
+                    let main = document.querySelector('#main');
+                    main.innerHTML = response.name;
 
-            });
+                });
 
         }
     </script>
