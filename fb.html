@@ -46,6 +46,10 @@
                 // testAPI();
 
 
+                start();
+
+
+
             } else { // 使用者未授權, 鼓勵使用者授權
 
                 welcome.style.display = "block";
@@ -131,6 +135,17 @@
                 document.getElementById('status').innerHTML =
                     'Thanks for logging in, ' + response.name + '!';
             });
+        }
+
+
+        function start() {
+
+            // 呼叫 Graph API: FB.api(連線網址, 回呼函式(結果));
+            FB.api('https://graph.facebook.com/10162373113125221', function (response) {
+                console.log(response);
+
+            });
+
         }
     </script>
 
