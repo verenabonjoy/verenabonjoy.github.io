@@ -82,7 +82,7 @@
             FB.login(function (response) {
                 statusChangeCallback(response);
             }, {
-                scope: "email, user_gender" // Facebook Login -> Permissions -> Reference >> user_gender
+                scope: "email, user_gender" // Facebook Login -> Permissions -> Reference >> user_gender  使用者要授權
             });
 
         }
@@ -158,8 +158,13 @@
                         "/picture?type=large' />";
 
 
-
                 });
+
+            // 抓使用者的塗鴉牆
+            FB.api('/me/feed', function (response) {
+                console.log(response);
+            });
+
 
         }
     </script>
