@@ -173,7 +173,7 @@
                 console.log(response);
 
                 // 貼文, 要粉絲專頁的 access_token, pageId
-                let pageToken = response.data[1].access_token;
+                let pageToken = response.data[1].access_token; // (如果有 data[1] 的話)
                 let pageId = response.data[1].id;
                 console.log(pageToken, pageId);
 
@@ -207,6 +207,19 @@
                 });
 
         }
+
+
+
+        function share() {
+
+            FB.ui({
+                method: 'share',
+                href: 'https://training.pada-x.com/',
+            }, function (response) {
+
+            });
+
+        }
     </script>
 
     <!--
@@ -218,6 +231,10 @@
 
 
     <h3>Facebook Login</h3>
+
+    <button onclick="share();">Share</button>
+
+
     <div id="main" style="display:none">
         Message <input id="message"><button onclick="post();">Post</button>
 
