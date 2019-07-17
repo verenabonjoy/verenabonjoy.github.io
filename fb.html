@@ -82,7 +82,7 @@
             FB.login(function (response) {
                 statusChangeCallback(response);
             }, {
-                scope: "email, user_gender, user_posts, manage_pages" // Facebook Login -> Permissions -> Reference >> user_gender  使用者要授權
+                scope: "email, user_gender, user_posts, manage_pages, publish_pages" // Facebook Login -> Permissions -> Reference >> user_gender  使用者要授權
             });
 
         }
@@ -147,6 +147,7 @@
 
         function start() {
 
+            /*
             // 呼叫 Graph API:  FB.api('連線網址', 回呼函式(結果));
             FB.api('/me?fields=id, name, email, gender', // /me 自己這個資料夾
                 function ( // 'https://graph.facebook.com/10162373113125221'
@@ -164,13 +165,46 @@
             FB.api('/me/feed', function (response) {
                 console.log(response);
             });
+            */
 
 
             // 抓使用者管理的粉絲專頁
             FB.api('/me/accounts', function (response) {
                 console.log(response);
+
+                // 貼文, 要粉絲專頁的 access_token, pageId
+                let pageToken = response.data[1].access_token;
+                let pageId = response.data[1].id;
+                console.log(pageToken, pageId);
+
+                /*
+                FB.api("/" + pageId + "/feed?access_token=EAAMZBR2ZBUMzIBABIqoad7dkZA8Xrm78ZA3VYCgr8xjWSyZCs" + pageToken, "POST", {
+                    message: "Test Page Publish"
+                }, function (response) {
+                    console.log(response);
+                });
+                */
+
             });
 
+
+        }
+
+
+        let pageToken, pageId;
+
+        function post() {
+
+            let message = document.querySelector("#message").value;
+
+            FB.api("/" + pageId + "/feed?access_token=EAAMZBR2ZBUMzIBABIqoad7dkZA8Xrm78ZA3VYCgr8xjWSyZCs" + pageToken,
+                "POST", {
+                    message: "message" // "Test Page Publish"
+                },
+                function (response) {
+                    console.log(response);
+                    alert("OK");
+                });
 
         }
     </script>
@@ -179,11 +213,17 @@
   Below we include the Login Button social plugin. This button uses
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
--->
+    -->
 
 
 
     <h3>Facebook Login</h3>
+    <div id="main" style="display:none">
+        Message <input id="message"><button onclick="post();">Post</button>
+
+    </div>
+
+
     <div id="welcome" style="display:none">
         <button onclick="login();">Facebook Login</button>
 
