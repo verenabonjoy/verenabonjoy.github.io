@@ -32,6 +32,20 @@
         // Initialize Firebase
         let db = firebase.initializeApp(firebaseConfig);
 
+
+        // Check Login Status
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                consol.log("Signed In", user.email);
+            } else {
+                console.log("Not Signed In");
+            }
+
+        });
+
+
+
+        // Support Facebook Login
         let provider = new firebase.auth.FacebookAuthProvider();
 
         provider.addScope('email, user_birthday');
@@ -72,12 +86,14 @@
         <button onclick="login();">Facebook Login</button>
 
     </div>
+
     <div id="main" style="display:none">
         Hello Friend
     </div>
 
-    
-    
+
+
+
 
 
 </body>
