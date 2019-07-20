@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Facebook Firebase</title>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+
+
+    <script>
+        // Your web app's Firebase configuration
+        let firebaseConfig = {
+            apiKey: "AIzaSyAd1lP_S-v-bJM9cdngIl1qpbCKmSnidk8",
+            authDomain: "js-311-8aab0.firebaseapp.com",
+            databaseURL: "https://js-311-8aab0.firebaseio.com",
+            projectId: "js-311-8aab0",
+            storageBucket: "js-311-8aab0.appspot.com",
+            messagingSenderId: "488973965271",
+            appId: "1:488973965271:web:45cf104b23845a9e"
+        };
+        // Initialize Firebase
+        let db = firebase.initializeApp(firebaseConfig);
+
+        let provider = new firebase.auth.FacebookAuthProvider();
+
+        provider.addScope('email, user_birthday');
+
+        function login() {
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+                console.log(user);
+
+            }).catch(function (error) {
+                console.log(error);
+
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+
+        }
+    </script>
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
